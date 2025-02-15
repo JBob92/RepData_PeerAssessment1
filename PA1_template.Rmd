@@ -33,6 +33,9 @@ median_steps <- median(daily_steps$steps)
 cat("Mean Steps per Day:", mean_steps, "\n")
 cat("Median Steps per Day:", median_steps, "\n")
 
+# Save the plot to a PNG file - plot1
+dev.copy(png, file = "plot1.png", width = 480, height = 480)
+dev.off()
 
 ## What is the average daily activity pattern?
 # 2 Avg daily activity pattern
@@ -47,6 +50,9 @@ plot(interval_steps$interval, interval_steps$steps, type = "l",
 max_interval <- interval_steps$interval[which.max(interval_steps$steps)]
 cat("5-minute interval with maximum steps:", max_interval, "\n")
 
+# Save the plot to a PNG file - plot2
+dev.copy(png, file = "plot2.png", width = 480, height = 480)
+dev.off()
 
 ## Imputing missing values
 # 3 Impute missing values
@@ -77,6 +83,9 @@ median_steps_filled <- median(daily_steps_filled$steps)
 cat("Mean Steps per Day (Imputed):", mean_steps_filled, "\n")
 cat("Median Steps per Day (Imputed):", median_steps_filled, "\n")
 
+# Save the plot to a PNG file - plot3
+dev.copy(png, file = "plot3.png", width = 480, height = 480)
+dev.off()
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -102,3 +111,6 @@ plot(weekend_data$interval, weekend_data$steps, type = "l", col = "red",
 
 par(mfrow = c(1, 1))
 
+# Save the plot to a PNG file - plot4
+dev.copy(png, file = "plot4.png", width = 480, height = 480)
+dev.off()
