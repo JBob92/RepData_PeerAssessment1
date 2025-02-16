@@ -1,10 +1,10 @@
----{r, fig.show="hold"}
+---
 title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
 ---
-
+```{r, fig.path="figure/", fig.width=6, fig.height=4}
 
 ## Loading and preprocessing the data
 #Rep_Data_Assignment1
@@ -20,6 +20,7 @@ data$date <- as.Date(data$date)
 
 ## What is mean total number of steps taken per day?
 # 1 mean no. steps per day
+
 # Sum steps per day, ignoring NAs
 daily_steps <- aggregate(steps ~ date, data, sum, na.rm = TRUE)
 
