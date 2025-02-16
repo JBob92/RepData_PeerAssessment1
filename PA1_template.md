@@ -1,0 +1,120 @@
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+knit2html("PA1_template.Rmd")
+browseURL("PA1_template.html")
+
+#Rep_Data_Assignment1
+
+# Set the working directory
+setwd("/home/rstudio/Reproducible Research/week2")
+
+
+# Read the CSV file
+data <- read.csv("activity.csv", stringsAsFactors = FALSE)
+
+
+
+# Convert date column to Date format
+data$date <- as.Date(data$date)
+
+# 1 mean no. steps per day
+# Sum steps per day, ignoring NAs
+daily_steps <- aggregate(steps ~ date, data, sum, na.rm = TRUE)
+
+# Histogram of total daily steps
+hist(daily_steps$steps, main = "Total Steps per Day", xlab = "Steps", col = "lightblue", breaks = 20)
+
+# Mean and Median of daily steps
+mean_steps <- mean(daily_steps$steps)
+median_steps <- median(daily_steps$steps)
+
+cat("Mean Steps per Day:", mean_steps, "\n")
+cat("Median Steps per Day:", median_steps, "\n")
+
+# Save the plot to a PNG file - plot1
+dev.copy(png, file = "plot1.png", width = 480, height = 480)
+dev.off()
+
+# 2 Avg daily activity pattern
+# Average steps per interval across all days
+interval_steps <- aggregate(steps ~ interval, data, mean, na.rm = TRUE)
+
+# Time series plot
+plot(interval_steps$interval, interval_steps$steps, type = "l",
+     main = "Average Daily Activity Pattern", xlab = "5-min Interval", ylab = "Average Steps")
+
+# Find the interval with the maximum average steps
+max_interval <- interval_steps$interval[which.max(interval_steps$steps)]
+cat("5-minute interval with maximum steps:", max_interval, "\n")
+
+# Save the plot to a PNG file - plot2
+dev.copy(png, file = "plot2.png", width = 480, height = 480)
+dev.off()
+
+# 3 Impute missing values
+# Count total missing values
+missing_count <- sum(is.na(data$steps))
+cat("Total Missing Values:", missing_count, "\n")
+
+# Replace NAs with mean for that interval
+for (i in 1:nrow(data)) {
+  if (is.na(data$steps[i])) {
+    data$steps[i] <- interval_steps$steps[interval_steps$interval == data$interval[i]]
+  }
+}
+
+# Verify no missing values remain
+sum(is.na(data$steps))
+
+# Sum steps per day after filling NAs
+daily_steps_filled <- aggregate(steps ~ date, data, sum)
+
+# Histogram with imputed data
+hist(daily_steps_filled$steps, main = "Total Steps per Day (Imputed Data)", xlab = "Steps", col = "lightgreen", breaks = 20)
+
+# New mean and median
+mean_steps_filled <- mean(daily_steps_filled$steps)
+median_steps_filled <- median(daily_steps_filled$steps)
+
+cat("Mean Steps per Day (Imputed):", mean_steps_filled, "\n")
+cat("Median Steps per Day (Imputed):", median_steps_filled, "\n")
+
+# Save the plot to a PNG file - plot3
+dev.copy(png, file = "plot3.png", width = 480, height = 480)
+dev.off()
+
+# 4 Weekdays vs weekends
+# Create weekday/weekend factor
+data$day_type <- ifelse(weekdays(data$date) %in% c("Saturday", "Sunday"), "weekend", "weekday")
+
+# Aggregate by interval and day type
+weekday_steps <- aggregate(steps ~ interval + day_type, data, mean)
+
+# Split data
+weekday_data <- subset(weekday_steps, day_type == "weekday")
+weekend_data <- subset(weekday_steps, day_type == "weekend")
+
+# Panel plot
+par(mfrow = c(2, 1))
+
+plot(weekday_data$interval, weekday_data$steps, type = "l", col = "blue",
+     main = "Weekday Activity", xlab = "5-min Interval", ylab = "Avg Steps")
+
+plot(weekend_data$interval, weekend_data$steps, type = "l", col = "red",
+     main = "Weekend Activity", xlab = "5-min Interval", ylab = "Avg Steps")
+
+par(mfrow = c(1, 1))
+
+# Save the plot to a PNG file - plot4
+dev.copy(png, file = "plot4.png", width = 480, height = 480)
+dev.off()
+
