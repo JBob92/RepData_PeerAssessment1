@@ -12,7 +12,6 @@ knit2html("PA1_template.Rmd")
 ```
 
 ```
-## Error in parse_block(g[-1], g[1], params.src, markdown_mode): Duplicate chunk label 'setup', which has been used for the chunk:
 ## knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -20,7 +19,7 @@ knit2html("PA1_template.Rmd")
 browseURL("PA1_template.html")
 ```
 
-#Rep_Data_Assignment1
+**#Rep_Data_Assignment1**
 
 # Set the working directory
 
