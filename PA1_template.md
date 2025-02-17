@@ -82,8 +82,11 @@ interval_steps <- aggregate(steps ~ interval, data, mean, na.rm = TRUE)
 ```r
 plot(interval_steps$interval, interval_steps$steps, type = "l",
      main = "Average Daily Activity Pattern", xlab = "5-min Interval", ylab = "Average Steps")
-```![](figure/plot1.png)
-
+![](figure/plot1.png)
+![](plot1.png)
+```
+![](figure/plot1.png)
+![](plot1.png)
 # Find the interval with the maximum average steps
 
 ```r
