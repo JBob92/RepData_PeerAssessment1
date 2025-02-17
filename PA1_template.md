@@ -47,9 +47,10 @@ daily_steps <- aggregate(steps ~ date, data, sum, na.rm = TRUE)
 
 ```r
 hist(daily_steps$steps, main = "Total Steps per Day", xlab = "Steps", col = "lightblue", breaks = 20)
+```![](figure/plot1.png)
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+
 # Mean and Median of daily steps
 
 ```r
@@ -81,9 +82,8 @@ interval_steps <- aggregate(steps ~ interval, data, mean, na.rm = TRUE)
 ```r
 plot(interval_steps$interval, interval_steps$steps, type = "l",
      main = "Average Daily Activity Pattern", xlab = "5-min Interval", ylab = "Average Steps")
-```
+```![](figure/plot1.png)
 
-![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10-1.png)
 # Find the interval with the maximum average steps
 
 ```r
