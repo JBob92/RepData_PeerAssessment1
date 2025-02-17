@@ -12,17 +12,6 @@ knit2html("PA1_template.Rmd")
 ```
 
 ```
-## Warning: It seems you should call rmarkdown::render() instead of knitr::knit2html()
-## because PA1_template.Rmd appears to be an R Markdown v2 document.
-```
-
-```
-## 
-## 
-## processing file: PA1_template.Rmd
-```
-
-```
 ## Error in parse_block(g[-1], g[1], params.src, markdown_mode): Duplicate chunk label 'setup', which has been used for the chunk:
 ## knitr::opts_chunk$set(echo = TRUE)
 ```
