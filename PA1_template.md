@@ -47,9 +47,9 @@ daily_steps <- aggregate(steps ~ date, data, sum, na.rm = TRUE)
 
 ```r
 hist(daily_steps$steps, main = "Total Steps per Day", xlab = "Steps", col = "lightblue", breaks = 20)
-```![](figure/plot1.png)
-```
 
+```
+![](plot1.png)
 
 # Mean and Median of daily steps
 
@@ -82,11 +82,10 @@ interval_steps <- aggregate(steps ~ interval, data, mean, na.rm = TRUE)
 ```r
 plot(interval_steps$interval, interval_steps$steps, type = "l",
      main = "Average Daily Activity Pattern", xlab = "5-min Interval", ylab = "Average Steps")
-![](figure/plot1.png)
-![](plot1.png)
+
 ```
-![](figure/plot1.png)
-![](plot1.png)
+
+![](plot2.png)
 # Find the interval with the maximum average steps
 
 ```r
@@ -138,8 +137,8 @@ daily_steps_filled <- aggregate(steps ~ date, data, sum)
 ```r
 hist(daily_steps_filled$steps, main = "Total Steps per Day (Imputed Data)", xlab = "Steps", col = "lightgreen", breaks = 20)
 ```
+![](plot3.png)
 
-![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png)
 # New mean and median
 
 ```r
@@ -191,7 +190,7 @@ plot(weekend_data$interval, weekend_data$steps, type = "l", col = "red",
      main = "Weekend Activity", xlab = "5-min Interval", ylab = "Avg Steps")
 ```
 
-![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21-1.png)
+![](plot4.png)
 
 ```r
 par(mfrow = c(1, 1))
